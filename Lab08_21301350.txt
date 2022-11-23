@@ -1,0 +1,189 @@
+#task 1
+def mini(arr,idx,size):
+  if idx == size:
+    return idx
+  k = mini(arr,idx+1,size)
+  if arr[idx] < arr[k]:
+    return idx
+  else:
+    return k
+
+def selection(arr,idx,size):
+  if idx == size:
+    return -1
+  else:
+     k = mini(arr,idx,size-1)
+     arr[k], arr[idx] = arr[idx], arr[k]
+     selection(arr,idx+1,size)
+
+
+list1 = [-2, 45, 0, 11, -9]
+selection(list1,0,5)
+print(list1)
+
+# task 2
+def swap(arr,key,j,size):
+  if j == -1:
+    return None
+
+  else:
+    if key < arr[j]:
+      arr[j+1],arr[j] = arr[j],arr[j+1]
+      return swap(arr,key,j-1,size+1)
+def insertion(arr,idx,size):
+  if idx == size:
+    return -1
+  else:
+    key = arr[idx]
+    j = idx-1
+    swap(arr,key,j,j)
+    #arr[j+1] = key
+    insertion(arr,idx+1,size)
+list1 = [-2, 45, 0, 11,-9,-11]
+insertion(list1,1,len(list1))
+print(list1)
+
+#task 3
+class Node:
+  def __init__(self,element,n):
+    self.val = element
+    self.next = n
+class LinkedList:
+  def __init__(self,arr):
+    self.head = Node(arr[0],None)
+    tail = self.head
+    for i in range(1,len(arr)):
+      n = Node(arr[i],None)
+      tail.next = n
+      tail= tail.next
+arr = [-2, 45, 0, 11, -9]
+obj = LinkedList(arr)
+head1 = obj.head
+head2 = obj.head
+#i = len(arr)-1
+def bubble(head1,head2,i):
+  head = head1
+  while head1 != None:
+    for j in range(0,i):
+      if head2.val > head2.next.val:
+        head2.val, head2.next.val = head2.next.val, head2.val
+      head2 = head2.next
+    i -= 1
+    head2=head
+    head1 = head1.next
+  return head
+    
+x=bubble(head1,head2,len(arr)-1)
+while(x!=None):
+  if x.next != None:
+    print(x.val, end=", ")
+  else:
+    print(x.val)
+  x=x.next
+
+#task 4
+class Node:
+  def __init__(self,element,n):
+    self.val = element
+    self.next = n
+class LinkedList:
+  def __init__(self,arr):
+    self.head = Node(arr[0],None)
+    tail = self.head
+    for i in range(1,len(arr)):
+      n = Node(arr[i],None)
+      tail.next = n
+      tail= tail.next
+arr = [-2, 45, 0, 11, -9]
+obj = LinkedList(arr)
+head1 = obj.head
+head2 = obj.head
+def select(head1,head2):
+  head = head1
+  while head1 != None:
+     min_idx = head1
+     while head2 != None:
+       if head2.val < min_idx.val:
+         min_idx = head2
+       head2 = head2.next
+     head1.val,min_idx.val = min_idx.val, head1.val
+     head2 = head1.next
+     head1 = head1.next
+  return head
+x=select(head1,head2)
+while(x!=None):
+  if x.next != None:
+    print(x.val, end=", ")
+  else:
+    print(x.val)
+  x=x.next
+
+#task 5
+class Node:
+  def __init__(self, e, n, p):
+    self.val = e
+    self.next = n
+    self.prev = p
+class DoublyList:
+  
+  def __init__(self, a):
+    self.head = Node(a[0],None,None)
+    tail = self.head
+    for i in range(1,len(a)):
+      new_node = Node(a[i], None, None)
+      tail.next = new_node
+      new_node.prev = tail
+      tail= tail.next
+def link_insert(head1):
+  head = head1
+  j = head1
+  while j.next != None:
+    i = j.next
+    while i != head:
+      if i.val < i.prev.val:
+        i.val,i.prev.val = i.prev.val, i.val 
+      i = i.prev
+    j = j.next
+  return head
+
+arr = [-2, 45, 0, 11, -9]
+obj = DoublyList(arr)
+head1 = obj.head
+x=link_insert(head1)
+while(x!=None):
+  if x.next != None:
+    print(x.val, end=", ")
+  else:
+    print(x.val)
+  x=x.next    
+
+#task 6
+def binary(arr,start,end,key):
+  mid = (start + end) // 2
+  if end < start:
+    return None
+  elif arr[mid] == key:
+    return "Found"
+  elif arr[mid] < key:
+    start = mid+1
+    return binary(arr,start,end,key)
+  else:
+    end = mid-1
+    return binary(arr,start,end,key)
+arr = [-9,-2,0,11,45]
+x = binary(arr,0,4,-2)
+print(x)
+
+#task 7
+def fib(n,arr):
+  if n==0 or n== 1:
+    arr[n] = n
+    return n
+  else:
+    if arr[n] != 0:
+      return arr[n]
+    else:
+      arr[n] = fib(n-1,arr)+fib(n-2,arr)
+      return arr[n]
+arr = [0]*6
+print(fib(5,arr))

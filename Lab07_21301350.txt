@@ -1,0 +1,161 @@
+#task 1(a)
+def fact(n):
+  if n == 1 :
+    return 1
+  else:
+    return n*fact(n-1)
+
+#task 1(b)
+def fib(n):
+  if n == 0 or n == 1:
+    return n
+  return fib(n-1)+fib(n-2)
+
+#task 1(c)
+def printer(a,i):
+  if i <= len(a)-1:
+    print(a[i])
+    return printer(a,i+1)
+
+#task 1(d)
+def powerN(b,n):
+  if n >= 0:
+    if n == 0:
+      return 1
+    return b*powerN(b,n-1)
+  else:
+    n = abs(n)
+    if n == 0:
+      return 1
+    return 1 / (b*powerN(b,n-1))
+
+#task 2(a)
+def binary(num):
+  if num//2 == 0:
+    print(str(num%2),end="")
+    return
+  else:
+    binary(num//2)
+    print(str(num%2),end="")
+
+#task 2(b)
+class Node:
+  def __init__(self,element,n):
+    self.val = element
+    self.next = n
+class LinkedList:
+  def __init__(self,arr):
+    self.head = Node(arr[0],None)
+    tail = self.head
+    for i in range(1,len(arr)):
+      n = Node(arr[i],None)
+      tail.next = n
+      tail= tail.next
+def addElements(head):
+  if head == None:
+    return 0
+  else:
+    return head.val + addElements(head.next)
+
+#task 2(c)
+class Node:
+  def __init__(self,element,n):
+    self.val = element
+    self.next = n
+class LinkedList:
+  def __init__(self,arr):
+    self.head = Node(arr[0],None)
+    tail = self.head
+    for i in range(1,len(arr)):
+      n = Node(arr[i],None)
+      tail.next = n
+      tail= tail.next
+def printer(head):
+  if head.next == None:
+    print(head.val)
+  else:
+    printer(head.next)
+    print(head.val)
+    return
+
+#task 3
+def hocBuilder(height): 
+  if height == 1:
+    return 8
+  else:
+    return 5 + hocBuilder(height-1)
+
+#task 4(a)
+def printer(n):
+  if n == 1:
+    print(n, end="")
+    return
+  else:
+    printer(n-1)
+    print(n,end="")
+def line(n):
+  if n == 1:
+    printer(n)
+    print()
+    return
+  else:
+    line(n-1)
+    printer(n)
+    print()
+
+#task 4(b)
+def printer(n):
+  if n == 1:
+    print(n, end="")
+    return
+  else:
+    printer(n-1)
+    print(n,end="")
+
+def space(n):
+  if n == 0:
+    return
+  else:
+    space(n-1)
+    print(" ",end="")
+
+def line(n,m):
+  if n == 1:
+    space(m-1)
+    printer(n)
+    print()
+    return
+  else:
+    line(n-1,m)
+    space(m-n)
+    printer(n)
+    print()
+
+#task 5
+class FinalQ: 
+ def print(self,array,idx): 
+   if(idx<len(array)): 
+     profit = self.calcProfit(array[idx])
+     if idx == len(array)-1:
+       print(idx+1,". Investment: ",array[idx],"; Profit:",profit)
+     else:
+       print(idx+1,". Investment: ",array[idx],"; Profit:",profit)
+       self.print(array,idx+1)
+  
+ def calcProfit(self,investment): 
+   if investment == 25000:
+     return 0.0
+   else:
+     man = 75000/100
+     res1 = man + man + man + man + man/2
+     inv = investment - 100000
+     inv = inv/100
+     res2 = inv + inv + inv + inv + inv + inv + inv + inv
+     res = res1 + res2
+     return float(res)  
+#Tester
+
+array=[25000,100000,250000,350000] 
+f = FinalQ() 
+f.print(array,0)
+

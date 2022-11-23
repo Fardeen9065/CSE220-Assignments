@@ -1,0 +1,160 @@
+#Task-1
+def shiftLeft(source,k):
+    for a in range(0,k):
+        i = 1
+        while(i < len(source)):
+            source[i-1] = source[i]
+            i = i + 1
+        source[i-1] = 0
+    return source
+source = [10,20,30,40,50,60]
+source = shiftLeft(source,3)
+print(source)
+
+#Task-2
+def rotateLeft(source, k):
+    for a in range(0,k):
+        i = 0
+        temp = source[0]
+        while(i < len(source) - 1):
+            source[i] = source[i+1]
+            i = i + 1
+        source[len(source) - 1] = temp        
+    return source
+source = [10,20,30,40,50,60]
+source = rotateLeft(source,3)
+print(source)  
+
+#Task-3
+def shiftRight(source, k):
+    for a in range(0,k):
+        i = len(source) - 1
+        while(i > 0):
+            source[i] = source[i-1]
+            i = i - 1
+        source[0] = 0
+    return source
+source = [10,20,30,40,50,60]
+source = shiftRight(source,3)
+print(source) 
+
+#Task-4
+def rotateRight(source, k):
+    for a in range(0,k):
+        i = len(source) - 1
+        temp = source[i]
+        while(i > 0):
+            source[i] = source[i-1]
+            i = i - 1
+        source[0] = temp
+    return source
+source = [10,20,30,40,50,60]
+source = rotateRight(source,3)
+print(source)
+
+#task-5
+def remove(source,size,idx):
+    while(idx < size):
+        source[idx] = source[idx+1]
+        idx = idx + 1
+    return source
+        
+source = [10,20,30,40,50,0,0]
+source = remove(source,5,2)
+print(source)
+
+#task-6
+def removeAll(source,size,element):
+    idx = 0
+    idx1 = 0
+    for i in range(0,size):
+        if source[i] != element:
+            source[idx1] = source[idx]
+            idx = idx + 1
+            idx1 = idx1 + 1
+        else:
+            idx = idx + 1
+    for j in range(idx1,size):
+        source[j] = 0
+    return source
+source = [10,2,30,2,50,2,2,0,0]
+source = removeAll(source,7,2)
+print(source)
+
+#task-7
+def balance(A):
+    summ1 = 0
+    summ2 = 0
+    flag = False
+    for i in range(0,len(A)):
+        if (i > 0) and (i < len(A) - 1):
+            arr1 = [0]*i
+            arr2 = [0]*(len(A) - i)
+            for j in range(0,len(arr1)):
+                arr1[j] = A[j]
+            for x in range(0,len(arr2)):
+                arr2[x] = A[j+1]
+                j = j + 1
+            for a in range(0,len(arr1)):
+                summ1 += arr1[a]
+            for b in range(0,len(arr2)):
+                summ2 += arr2[b]
+            if summ1 == summ2:
+                flag = True
+            summ1 = 0
+            summ2 = 0
+    if flag == True:
+        return True
+    else:
+        return False                
+source = [1, 1, 1, 2, 1]
+source = balance(source)
+print(source)
+
+#task-8
+def pattern(n):
+    count = 0
+    arr = [0]*(n*n)
+    for line in range(1,n+1):
+        for space in range(0,n-line):
+            arr[count] = 0
+            count += 1
+        for num in range(line,0,-1):
+            arr[count] = num
+            count += 1
+    return arr      
+source = pattern(4)
+print(source)
+
+#task-9
+def repeat(arr):
+    count = 0
+    maxx = 0
+    temp = arr[0]
+    for i in range(len(arr)):
+        if arr[i] == temp:
+            count +=1
+            if count > maxx:
+                maxx = count
+        else:
+            temp = arr[i]
+            count = 1
+    return maxx
+source = [1, 2, 2, 3, 4, 4, 4]
+source = repeat(source)
+print(source)
+
+#task-10
+def repetition(list1):
+    arr = [0]*9999
+    for i in range(len(list1)):
+        arr[list1[i]] += 1
+    for i in range(len(list1)):
+        for j in range(i+1,len(list1)+1):
+            if arr[i] != 0 and arr[i] != 1:
+                if arr[i] == arr[j]:
+                    return True
+    return False
+source = [4,5,6,6,4,3,6,4]
+source = repetition(source)
+print(source)

@@ -1,0 +1,101 @@
+class Stack:
+  def __init__(self):
+    self.arr = []
+    self.top = -1
+  def push(self,elem):
+    self.top = self.top + 1
+    self.arr += [elem]
+  def pop(self):
+    if self.top >= 0:
+      element = self.arr[self.top]
+      self.arr = self.arr[:len(self.arr) - 1]
+      self.top = self.top - 1
+      return element
+    else:
+      return "Error"
+
+def Balance(string1):
+  list1 = ["(","[","{"]
+  list2 = [")","]","}"]
+  sign = Stack()
+  idx = 0
+  idx1 = 0
+  for i in string1:
+    idx += 1
+    if i in list1:
+      sign.push(i)
+    elif i in list2:
+       length = len(sign.arr) - 1
+       for j in range(len(list2)):
+         if (len(sign.arr) > 0) and (list1[j] == sign.arr[length]):
+           sign.pop()
+           break
+         elif length >= 0:
+           if (list1[j] != sign.arr[length]):
+             x= sign.arr[length]
+             for a in range(len(string1)):
+              if string1[a] == x:
+               idx1 = a + 1
+               break
+         if len(sign.arr) == 0:
+           return f"This expression is NOT correct.\nError at character # {idx}.'{i}'- not opened."
+  if (len(sign.arr) == 0):
+      return "This expression is correct."
+  else:
+      return  f"This expression is NOT correct.\nError at character # {idx1}.'{x}'- not closed."
+
+inp = input()
+print(Balance(inp))
+    
+class Node:
+  def __init__(self,e,n):
+    self.elem = e
+    self.next = n
+
+class LinkedStack:
+  def __init__(self):
+    self.head = None
+    self.top = -1
+  def push(self,elem):
+    new_node = Node(elem,None)
+    new_node.next = self.head
+    self.head = new_node
+  def pop(self):
+    if self.head != None:
+     remove = self.head
+     self.head = self.head.next
+     remove = None
+    else:
+      return "Error"
+
+def LinkedBalance(string1):
+  list1 = ["(","[","{"]
+  list2 = [")","]","}"] 
+  check = LinkedStack()
+  idx = 0
+  idx1 = 0
+  for i in string1:
+    idx += 1
+    if i in list1:
+      check.push(i)
+    elif i in list2:
+      for i in range(len(list2)):
+        if (check.head != None) and (list1[i] == check.head.elem):
+          check.pop()
+          break
+        elif check.head != None:
+          if (list1[i] != check.head.elem):
+            x = check.head.elem
+            for b in range(len(string1)):
+              if string1[b] == x:
+               idx1 = b + 1
+               break
+        if check.head == None:
+          return f"This expression is NOT correct.\nError at character # {idx}.'{string1[idx-1]}'- not opened."
+  if (check.head == None):
+    return "This expression is correct."
+  else:
+    return f"This expression is NOT correct.\nError at character # {idx1}.'{string1[idx1-1]}'- not closed."
+
+inp = input()
+print(LinkedBalance(inp))   
